@@ -1,0 +1,44 @@
+﻿@model List<MenuItem>
+
+<!-- Hero image genom Bootstrap -->
+<div class="jumbotron jumbotron-fluid" style="background-image: url('https://media.kotthallen.se/w_1440,q_auto,f_auto/prod/kotthallen/app/sv_SE/ravarukunskap/notkott1440x500.png'); background-size: cover; height: 250px; color: white;">
+</div>
+
+<!-- Sortera efter Kategori och Beskrivning -->
+@{
+    var groupedMenuItems = Model.GroupBy(item => item.TypeOf); // Gruppindela efter kategori
+
+    var categoryDescriptions = new Dictionary<string, string> // Dictionary med kategorinamn och tillhörande beskrivning
+    {
+        {"Starters", "”Här på BG är ursprungstanken att förrätterna delas vid bordet, men ni gör såklart som ni vill.”"},
+        {"Dry aging room", "Vi har en enkel filosofi när det gäller vårt hängmörade kött. Det ska vara så marmorerat som möjligt. Extremt få kor uppfyller det kravet. Detta medför att vi inte kan jobba med endast en gård. Vi har ett nära samarbete med Scan och Benny Granqvist som handplockar svenskt kött av den kvalitet vi eftersträvar. Vi hänger köttet 40 dagar på ben"},
+        {"Mains", "Här hittar du rätter på säsongens råvaror blandat med våra klassiker"},
+        {"Desserts", "Något smått och gott efter maten är alltid trevligt."}
+    };
+}
+<!-- Visa upp Kategori och Beskrivning -->
+@foreach (var group in groupedMenuItems)
+{
+    <h2 class="display-5 fw-normal mt-4">@group.Key</h2> // Visar upp alla kategorinamn
+
+    @if (categoryDescriptions.ContainsKey(group.Key))
+    {
+        <p class="lead fst-italic">@categoryDescriptions[group.Key]</p> // Visar upp beskrivning genom en nyckel som är kategori namn
+    }
+    <!-- Hur korten ska se ut -->
+    <div class="row">
+        @foreach (var menuItem in group)
+        {
+            <article class="col-md-4 mb-4"> 
+                <!-- Tre kolumner på medelstora skärmar och högre -->
+                <div class="card d-flex flex-column h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">@menuItem.Name</h5>
+                        <p class="fw-light fst-italic">@menuItem.Description</p>
+                        <p class="card-text">Price: @menuItem.Price</p>
+                    </div>
+                </div>
+            </article>
+        }
+    </div>
+}
