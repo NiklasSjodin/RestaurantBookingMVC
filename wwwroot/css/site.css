@@ -1,3 +1,7 @@
+body {
+    font-family: 'Georgia', serif; /* Sätter font-family på all text */
+}
+
 html {
   font-size: 14px;
 }
