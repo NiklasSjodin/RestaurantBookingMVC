@@ -18,5 +18,20 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+  margin-bottom: 60px; 
+}
+#carouselExampleCaptions {
+    width: 50%; /* Sätter karusellens bredd till 50% av sidan */
+    margin: 0 auto; /* Centrera karusellen horisontellt */
+}
+
+.carousel-item img {
+    height: 300px; /* Fixerad höjd för bilderna */
+    width: auto; /* Automatisk bredd beroende på höjd */
+    object-fit: cover; /* Ser till att bilden fyller hela området utan att förlora proportioner */
+}
+
+.carousel-control-prev, .carousel-control-next {
+    top: 50%; /* Placera knapparna i mitten vertikalt */
+    transform: translateY(-50%); /* Justerar knapparna så att de är centrerade */
 }
