@@ -10,10 +10,10 @@
 </div>
 
 <!-- Restaurang text och bild -->
-<div class="container" style="margin-top: 200px">
+<div class="container" style="margin-top: 200px; margin-bottom: 100px">
     <div class="row d-flex justify-content-center align-items-center">
-        <div class="col-md-5">
-            <h2 class="fs-1 text-left">En restaurang för alla...</h2> <!-- Texten centrerad -->
+        <div class="col-md-5" >
+            <h2 class="fs-1 text-left">En restaurang för alla...</h2>
             <p class="fw-normal text-left">
                 men om vi ska vara ärliga, framförallt för köttälskare. Om vi får skryta, så har BG Sveriges bästa porterhouse, clubsteak, entrecôte etc, handplockade och levererade av Scan. Självklart finns det mycket annat på menyn, men det är detta som ligger oss närmast om hjärtat. Vi hängmörar själva och i den stora kylen vid entrén hänger styckena på rad.
             </p>
@@ -26,8 +26,7 @@
             <p class="text-left">
                 Med AG har vi skapat restaurangen vi själva skulle vilja gå till. Ett ställe för alla som tycker om att umgås, ha trevligt och äta förstklassiga råvaror tillagade utan krångel, men med små medel och stor kunskap. Många börjar med att äta sig hungriga på tapas i baren och fortsätter vid bordet med att dela olika förrätter. Sedan är det dags för – just det – en härlig köttbit. Mycket välkommen.
             </p>
-            <p class="fst-italic text-center">
-                <!-- Niklas text centrerad -->
+            <p class="fst-italic text-left">
                 Niklas Ramsey
             </p>
         </div>
@@ -39,7 +38,9 @@
 
 
 <!-- Text och karusll med bilder -->
-<div id="carouselExampleCaptions" class="carousel slide" style="margin-top:200px">
+<div style="position: relative; height: 32rem; width: 100vw; overflow: hidden; margin: 0; padding: 0; background-color: #f2f2f2">
+<div id="carouselExampleCaptions" class="carousel slide" style="margin-top:75px">
+    <h2 class="fs-2">Några av våra mest populära rätter just nu</h2>
     <div class="carousel-indicators">
         <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
         <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -73,4 +74,72 @@
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Next</span>
     </button>
+</div>
+</div>
+<!-- Bild med länk till Boka bord och Meny -->
+<div class="jumbotron jumbotron-fluid" style="background-image: url('/Images/emerson-vieira-_aR4l6fj6wQ-unsplash.jpg'); background-size: cover; background-position: center; height: 400px; color: white; display: flex; align-items: center; justify-content: center;">
+    <div class="container text-center">
+        <button class="btn btn-dark btn-lg" onclick="location.href='@Url.Action("Index", "MenuItems")'">Meny</button>
+    </div>
+</div>
+
+<!-- Öppettider -->
+<div class="container my-5">
+    <h2 class="display-5 text-center mb-4">Öppettider</h2>
+
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <ul class="list-unstyled text-center">
+                <li>
+                    <strong>Måndag - Torsdag:</strong> 17:00 - 00:00
+                </li>
+                <li>
+                    <strong>Fredag:</strong> 17:00 - 01:00
+                </li>
+                <li>
+                    <strong>Lördag:</strong> 13:00 - 01:00
+                </li>
+                <li>
+                    <strong>Söndag:</strong> 17:00 - 00:00
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!--Övrig text -->
+    <div class="row justify-content-center">
+        <div class="col-md-8 text-center">
+            <p class="mt-3">
+                <em>Meddela oss vid bokning vid behov av större hiss, för rullstol eller barnvagn, så lämnar vi ut en annan ankomstadress.</em>
+            </p>
+            <p>
+                Vi svarar i telefonen från klockan <strong>09.00 på vardagar</strong>.
+            </p>
+            <p>
+                <strong>Vi är en kontantfri restaurang</strong>.
+            </p>
+        </div>
+    </div>
+</div>
+<!-- Kontakt -->
+<div class="container my-5">
+    <h2 class="display-5 text-center mb-4">Kontakt</h2>
+
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <ul class="list-unstyled text-center">
+                <li>
+                    <strong>Telefon:</strong> 08 410 681 00
+                </li>
+                <li>
+                    <strong>Email:</strong> info@restaurangbg.se
+                </li>
+                <li>
+                    <strong>Adress:</strong> Kronobergsgatan 37, 112 33 Stockholm
+                </li>
+            </ul>
+            <div class="d-grid gap-2">
+                <button type="button" class="btn btn-outline-secondary btn-lg">Boka Bord</button>
+            </div>
+        </div>
+    </div>
 </div>
