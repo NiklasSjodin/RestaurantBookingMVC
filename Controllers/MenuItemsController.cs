@@ -14,7 +14,7 @@ namespace RestaurantBookingMVC.Controllers
         }
         public async Task <IActionResult> Index()
         {
-            ViewData["Title"] = "Menus | BG's"; // Sätter titeln i fliken
+            ViewData["Title"] = "Menu | BG's"; // Sätter titeln i fliken
 
             var response = await _httpClient.GetAsync($"{baseUri}api/MenuItems"); // Hämtar vår data från vårt API
             var json = await response.Content.ReadAsStringAsync(); // Omvandlar datan till json sträng
