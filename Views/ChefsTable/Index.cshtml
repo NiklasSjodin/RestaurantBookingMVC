@@ -1,0 +1,124 @@
+﻿@{
+    ViewData["Title"] = "Chef's table | BGs";
+}
+<!-- Bar text och bild -->
+<div class="container" style="margin-top: 100px; margin-bottom: 200px">
+    <div class="row d-flex justify-content-center align-items-center">
+        <div class="col-md-5">
+            <h2 class="fs-1 text-left">Chef's table</h2>
+            <p class="text-left">
+                Vid bordet välkomnas matglada entusiaster som är öppna för att äta det mesta. Ni kommer att befinna er helt i kockarnas händer vad gäller menyn för kvällen, vilken består av såväl kött som fisk och skaldjur.
+            </p>
+            <p class="text-left">
+                Vi serverar två olika matmenyer:
+            </p>
+            <h3 class="text-left">Chef's StandarMeny</h3>
+            <p class="text-left"><strong>1750kr/person</strong> <em>(6-8 personer)</em></p>
+            <h3 class="text-left">Chef's Deluxemeny'</h3>
+            <p class="text-left"><strong>2750kr/person</strong> <em>(4-8 personer)</em></p>
+            <p class="text-left fst-italic">Dryck tillkommer</p>
+            <a class="btn btn-dark btn-lg" data-bs-toggle="modal" data-bs-target="#bookingModal">Bokningsförfrågan</a>
+        </div>
+        <div class="col-md-4 d-flex justify-content-center">
+            <img src="/Images/ambitious-studio-rick-barrett-EAKuOruLL4c-unsplash.jpg" alt="A table with glasses and coasters under them." class="img-fluid" />
+        </div>
+    </div>
+</div>
+
+<!-- Modal för bokningsförfrågan -->
+<div class="modal fade" id="bookingModal" tabindex="-1" aria-labelledby="bookingModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="bookingModalLabel">Bokningsförfrågan</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Namn</label>
+                        <input type="text" class="form-control" id="name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">E-post</label>
+                        <input type="email" class="form-control" id="email">
+                    </div>
+                    <div class="mb-3">
+                        <label for="phone" class="form-label">Telefon</label>
+                        <input type="tel" class="form-control" id="phone">
+                    </div>
+                    <div class="mb-3">
+                        <label for="persons" class="form-label">Antal, datum och övrig information</label>
+                        <input type="text" class="form-control" id="persons">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-dark btn-lg">Skicka förfrågan</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Öppettider -->
+<div class="container my-5">
+    <h2 class="display-5 text-center mb-4">Öppettider</h2>
+
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <ul class="list-unstyled text-center">
+                <li>
+                    <strong>Måndag - Torsdag:</strong> 17:00 - 00:00
+                </li>
+                <li>
+                    <strong>Fredag:</strong> 17:00 - 01:00
+                </li>
+                <li>
+                    <strong>Lördag:</strong> 13:00 - 01:00
+                </li>
+                <li>
+                    <strong>Söndag:</strong> 17:00 - 00:00
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!--Övrig text -->
+    <div class="row justify-content-center">
+        <div class="col-md-8 text-center">
+            <p class="mt-3">
+                <em>Meddela oss vid bokning vid behov av större hiss, för rullstol eller barnvagn, så lämnar vi ut en annan ankomstadress.</em>
+            </p>
+            <p>
+                Vi svarar i telefonen från klockan <strong>09.00 på vardagar</strong>.
+            </p>
+            <p>
+                <strong>Vi är en kontantfri restaurang</strong>.
+            </p>
+        </div>
+    </div>
+</div>
+<!-- Kontakt -->
+<div class="container my-5">
+    <h2 class="display-5 text-center mb-4">Kontakt</h2>
+
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <ul class="list-unstyled text-center">
+                <li>
+                    <strong>Telefon:</strong> 08 410 681 00
+                </li>
+                <li>
+                    <strong>Email:</strong> info@restaurangbg.se
+                </li>
+                <li>
+                    <strong>Adress:</strong> Kronobergsgatan 37, 112 33 Stockholm
+                </li>
+            </ul>
+            <div class="d-grid gap-2">
+                <button type="button" class="btn btn-outline-secondary btn-lg">Boka Bord</button>
+            </div>
+        </div>
+    </div>
+</div>
