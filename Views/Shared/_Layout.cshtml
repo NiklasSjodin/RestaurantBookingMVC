@@ -40,8 +40,8 @@
                                asp-area="" asp-controller="GiftCard" asp-action="Index">PRESENTKORT</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link @(ViewContext.RouteData.Values["Controller"].ToString() == "MenuItems" && ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active" : "")"
-                               asp-area="" asp-controller="MenuItems" asp-action="Index">BOKA BORD</a>
+                            <a class="nav-link @(ViewContext.RouteData.Values["Controller"].ToString() == "Admin" && ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active" : "")"
+                               asp-area="" asp-controller="Admin" asp-action="Index">Reservationer</a>
                         </li>
                         <!----------------- Dropdown Meny för Contact och Policy ----------------->
                         <li class="nav-item dropdown">
