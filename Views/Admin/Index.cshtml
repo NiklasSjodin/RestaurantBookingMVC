@@ -1,0 +1,26 @@
+﻿@model List<RestaurantBookingMVC.Models.DTOs.ReservationDTO>
+
+    <h2>Alla Reservationer</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Name: </th>
+                <th>Time: </th>
+                <th>Guests: </th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach(var reservation in Model)
+        {
+            <tr>
+                <td>@reservation.CustomerID</td>
+                <td>@reservation.FirstName</td>
+                <td>@reservation.NumberOfGuests</td>
+                <td>
+                    <a href="/Reservation/Edit/@reservation.ReservationId">Edit</a> |
+                    <a href="/Reservation/Delete/@reservation.ReservationId">Delete</a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
