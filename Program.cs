@@ -9,6 +9,12 @@ namespace RestaurantBookingMVC
             // Add services to the container.
             builder.Services.AddControllersWithViews();
             builder.Services.AddHttpClient();
+            builder.Services.ConfigureApplicationCookie(options =>
+            {
+                options.Cookie.SecurePolicy = CookieSecurePolicy.Always; // Se till att cookies skickas över HTTPS
+                options.Cookie.SameSite = SameSiteMode.None; // Tillåt cookies att skickas över olika ursprung
+            });
+
 
             var app = builder.Build();
 
