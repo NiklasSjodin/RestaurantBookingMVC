@@ -83,6 +83,7 @@ namespace RestaurantBookingMVC.Controllers
         //------------------- Menu Items-------------------
         public async Task<IActionResult> MenuItems()
         {
+            ViewData["Title"] = "Admin | BG's";
             var response = await _httpClient.GetAsync($"{baseUri}api/MenuItems");
             var json = await response.Content.ReadAsStringAsync();
             var menuItemsList = JsonConvert.DeserializeObject<List<MenuItem>>(json);
@@ -131,11 +132,41 @@ namespace RestaurantBookingMVC.Controllers
 
         public async Task<IActionResult> Tables()
         {
+            ViewData["Title"] = "Admin | BG's";
             var response = await _httpClient.GetAsync($"{baseUri}api/Tables");
             var json = await response.Content.ReadAsStringAsync();
             var tablesList = JsonConvert.DeserializeObject<List<Table>>(json);
 
             return View(tablesList);
+        }
+
+        public IActionResult CreateTable()
+        {
+            ViewData["Title"] = "Create Table | BG's";
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateTable(Table table)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(table);
+            }
+
+            var json = JsonConvert.SerializeObject(table);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            var response = await _httpClient.PostAsync($"{baseUri}api/Tables/createTable", content);
+            if (!response.IsSuccessStatusCode)
+            {
+                // Logga eller hantera felet här
+                var errorMessage = await response.Content.ReadAsStringAsync();
+                Console.WriteLine($"Error creating table: {errorMessage}");
+                // Eventuellt kan du även returnera samma vy med reservationen för att visa felmeddelanden
+                ModelState.AddModelError("", "Failed to create table.");
+                return View(table);
+            }
+            return RedirectToAction("Tables");
         }
 
         public async Task<IActionResult> UpdateTable(int id)
