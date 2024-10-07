@@ -1,5 +1,5 @@
 ﻿@model List<RestaurantBookingMVC.Models.DTOs.ReservationDTO>
-
+<!-- Hämta alla reservationer-->
 <div class="container mt-4">
     <h2 class="mb-4">Alla Reservationer</h2>
     <table class="table table-striped table-bordered">
@@ -22,7 +22,11 @@
                     <td class="editable" data-field="TableNumber">@reservation.TableNumber</td>
                     <td>
                         <button class="btn btn-warning edit-btn">Ändra</button>
-                        <a asp-controller="Admin" asp-action="DeleteReservation" asp-route-id="@reservation.ReservationId" class="btn btn-danger">Ta Bort</a>
+                        <form method="post" asp-action="DeleteReservation" style="display:inline;">
+                            @*  Användning av form för att få till en post så man kan använda delete funktionen, fungerar inte med a tagg då det blir en get *@
+                            <input type="hidden" name="id" value="@reservation.ReservationId" /> @* Gömmer id för användaren *@
+                            <button type="submit" class="btn btn-danger">Ta Bort</button> @* Vad som ska hända när man trycker på knappen *@
+                        </form>
                     </td>
                 </tr>
             }
@@ -30,6 +34,7 @@
     </table>
 </div>
 
+<!-- JavaScript för inline redigering av reservationer-->
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> 
 <script>
     $(document).ready(function () {
