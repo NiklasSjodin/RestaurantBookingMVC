@@ -41,7 +41,10 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link @(ViewContext.RouteData.Values["Controller"].ToString() == "Admin" && ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active" : "")"
-                               asp-area="" asp-controller="Admin" asp-action="Index">Reservationer</a>
+                               asp-area="" asp-controller="Admin" asp-action="Index">RESERVATIONER</a>
+                            <a class="nav-link @(ViewContext.RouteData.Values["Controller"].ToString() == "Admin" && ViewContext.RouteData.Values["Action"].ToString() == "MenuItems" ? "active" : "")"
+                               asp-area="" asp-controller="Admin" asp-action="MenuItems">MENY</a>
+
                         </li>
                         <!----------------- Dropdown Meny för Contact och Policy ----------------->
                         <li class="nav-item dropdown">
