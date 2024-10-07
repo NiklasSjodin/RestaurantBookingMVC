@@ -1,0 +1,93 @@
+﻿@model List<RestaurantBookingMVC.Models.Table>
+
+<div class="container mt-4">
+    <h2 class="mb-4">Bord</h2>
+    <table class="table table-striped table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Bordsnummer</th>
+                <th scope="col">Platser</th>
+                <th scope="col">Åtgärder</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var table in Model)
+            {
+                <tr>
+                    <td class="editable" data-field="TableID">@table.TableID</td>
+                    <td class="editable" data-field="TableNumber">@table.TableNumber</td>
+                    <td class="editable" data-field="NumberOfSeats">@table.NumberOfSeats</td>
+                    <td>
+                        <button class="btn btn-warning edit-btn">Ändra</button>
+                        <form method="post" asp-action="DeleteTable" style="display:inline;">
+                            @*  Användning av form för att få till en post så man kan använda delete funktionen, fungerar inte med a tagg då det blir en get *@
+                            <input type="hidden" name="id" value="@table.TableID" /> @* Gömmer id för användaren *@
+                            <button type="submit" class="btn btn-danger">Ta Bort</button> @* Vad som ska hända när man trycker på knappen *@
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<!-- JavaScript för inline redigering av reservationer-->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.edit-btn').click(function () {
+            var row = $(this).closest('tr');
+            var reservationId = row.data('id');
+
+            // Gå igenom varje cell som är redigerbar
+            row.find('.editable').each(function () {
+                var cell = $(this);
+                var currentValue = cell.text();
+
+                // Byt ut cellens text mot ett input-fält
+                cell.html('<input type="text" class="form-control" value="' + currentValue + '"/>');
+            });
+
+            // Byt ut "Ändra"-knappen till en "Spara"-knapp
+            $(this).replaceWith('<button class="btn btn-success save-btn">Spara</button>');
+        });
+
+        $(document).on('click', '.save-btn', function () {
+            var row = $(this).closest('tr');
+            var reservationId = row.data('id');
+            var updatedData = {
+                ReservationId: reservationId
+            };
+
+            // Samla in nya värden från input-fälten
+            row.find('.editable').each(function () {
+                var cell = $(this);
+                var fieldName = cell.data('field');
+                var newValue = cell.find('input').val();
+                updatedData[fieldName] = newValue;
+            });
+
+            // Gör en AJAX POST-begäran för att uppdatera maträtten
+            $.ajax({
+                url: '/Admin/UpdateTable',
+                type: 'POST',
+                data: updatedData,
+                success: function (response) {
+                    // Uppdatera cellerna med det nya värdet
+                    row.find('.editable').each(function () {
+                        var cell = $(this);
+                        var newValue = updatedData[cell.data('field')];
+                        cell.html(newValue); // Byt tillbaka till text
+                    });
+
+                    // Byt tillbaka till "Ändra"-knappen
+                    $(this).replaceWith('<button class="btn btn-warning edit-btn">Ändra</button>');
+                }.bind(this), // Bind 'this' för att referera till den aktuella knappen
+                error: function (xhr, status, error) {
+                    alert('Ett fel uppstod: ' + error);
+                }
+            });
+        });
+    });
+</script>
