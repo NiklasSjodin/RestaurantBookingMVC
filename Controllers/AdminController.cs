@@ -14,6 +14,7 @@ namespace RestaurantBookingMVC.Controllers
         {
             _httpClient = client;
         }
+        // Reservations
         public async Task<IActionResult> Index() // Hämtar alla reservationer
         {
             ViewData["Title"] = "Admin | BG's"; // Sätter titeln i fliken
@@ -71,12 +72,59 @@ namespace RestaurantBookingMVC.Controllers
             }
             return RedirectToAction("Index");
         }
-        [HttpDelete]
+        [HttpPost]
         public async Task<IActionResult> DeleteReservation(int id)
         {
             var response = await _httpClient.DeleteAsync($"{baseUri}api/Reservations/deleteReservation/{id}");
 
             return RedirectToAction("Index");
+        }
+        
+        // Menu Items
+        public async Task<IActionResult> MenuItems()
+        {
+            var response = await _httpClient.GetAsync($"{baseUri}api/MenuItems");
+            var json = await response.Content.ReadAsStringAsync();
+            var menuItemsList = JsonConvert.DeserializeObject<List<MenuItem>>(json);
+
+            return View(menuItemsList);
+        }
+
+        public async Task<IActionResult> UpdateMenuItem(int id)
+        {
+            var response = await _httpClient.GetAsync($"{baseUri}api/MenuItems/updateMenuItem/{id}");
+            var json = await response.Content.ReadAsStringAsync();
+            var menuItem = JsonConvert.DeserializeObject<MenuItem>(json);
+
+            return View(menuItem);
+        }
+        [HttpPost]
+        public async Task<IActionResult> UpdateMenuItem(MenuItem item)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(item);
+            }
+            var json = JsonConvert.SerializeObject(item);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            var response = await _httpClient.PutAsync($"{baseUri}api/MenuItems/updateMenuItem/{item.ItemId}", content);
+            if (!response.IsSuccessStatusCode)
+            {
+                // Logga eller hantera felet här
+                var errorMessage = await response.Content.ReadAsStringAsync();
+                Console.WriteLine($"Error updating menu item: {errorMessage}");
+                // Eventuellt kan du även returnera samma vy med reservationen för att visa felmeddelanden
+                ModelState.AddModelError("", "Failed to update menu item.");
+                return View(item);
+            }
+            return RedirectToAction("MenuItems");
+        }
+        [HttpPost]
+        public async Task<IActionResult> DeleteMenuItem(int id)
+        {
+            var response = await _httpClient.DeleteAsync($"{baseUri}api/MenuItems/deleteMenuItem/{id}");
+
+            return RedirectToAction("MenuItems");
         }
     }
 }
