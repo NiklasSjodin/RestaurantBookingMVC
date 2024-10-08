@@ -44,12 +44,19 @@ namespace RestaurantBookingMVC.Controllers
             var response = await _httpClient.PostAsync($"{baseUri}api/Reservations/createReservation", content);
             if (!response.IsSuccessStatusCode)
             {
-                // Logga eller hantera felet här
                 var errorMessage = await response.Content.ReadAsStringAsync();
-                Console.WriteLine($"Error creating reservation: {errorMessage}");
-                // Eventuellt kan du även returnera samma vy med reservationen för att visa felmeddelanden
-                ModelState.AddModelError("", "Failed to create reservation.");
-                return View(reservation);
+
+                // Om svaret innehåller ett specifikt felmeddelande (exempelvis för för många gäster)
+                if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
+                {
+                    ModelState.AddModelError("NumberOfGuests", errorMessage); // Lägg till felmeddelande för NumberOfGuests
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Misslyckades med att skapa reservation."); // Generellt felmeddelande
+                }
+
+                return View(reservation); // Returnera samma vy med felmeddelande
             }
             return RedirectToAction("Index");
         }
