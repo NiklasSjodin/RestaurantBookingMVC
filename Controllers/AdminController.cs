@@ -25,24 +25,35 @@ namespace RestaurantBookingMVC.Controllers
             return View(reservationsList);
         }
 
-        public IActionResult CreateReservation() 
+        public IActionResult CreateReservation()
         {
+            ViewData["Title"] = "Create Reservation | BG's";
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateReservation(ReservationDTO reservation)
+        public async Task<IActionResult> CreateReservation(ReservationCreate reservation)
         {
             if (!ModelState.IsValid)
             {
                 return View(reservation);
             }
 
-            var json = JsonConvert.SerializeObject(reservation); // Omvandlar reservation objektet till en sträng
-            var content = new StringContent(json, Encoding.UTF8, "application/json"); // Paketerar json strängen till en del av HTTP-förfrågan
-            var response = await _httpClient.PostAsync($"{baseUri}api/Reservations/createReservation", content); // Vilken endpoint vi ska skicka det till och vad som ska skickas med
-            return RedirectToAction("Index"); // Redirect till våran index sida om allt lyckas
+            var json = JsonConvert.SerializeObject(reservation);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            var response = await _httpClient.PostAsync($"{baseUri}api/Reservations/createReservation", content);
+            if (!response.IsSuccessStatusCode)
+            {
+                // Logga eller hantera felet här
+                var errorMessage = await response.Content.ReadAsStringAsync();
+                Console.WriteLine($"Error creating reservation: {errorMessage}");
+                // Eventuellt kan du även returnera samma vy med reservationen för att visa felmeddelanden
+                ModelState.AddModelError("", "Failed to create reservation.");
+                return View(reservation);
+            }
+            return RedirectToAction("Index");
         }
+
 
         public async Task<IActionResult> UpdateReservation(int id)
         {
@@ -89,6 +100,35 @@ namespace RestaurantBookingMVC.Controllers
             var menuItemsList = JsonConvert.DeserializeObject<List<MenuItem>>(json);
 
             return View(menuItemsList);
+        }
+
+        public IActionResult CreateMenuItem()
+        {
+            ViewData["Title"] = "Create Menu Item | BG's";
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateMenuItem(MenuItem item)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(item);
+            }
+
+            var json = JsonConvert.SerializeObject(item);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            var response = await _httpClient.PostAsync($"{baseUri}api/MenuItems/createMenuItem", content);
+            if (!response.IsSuccessStatusCode)
+            {
+                // Logga eller hantera felet här
+                var errorMessage = await response.Content.ReadAsStringAsync();
+                Console.WriteLine($"Error creating menu item: {errorMessage}");
+                // Eventuellt kan du även returnera samma vy med reservationen för att visa felmeddelanden
+                ModelState.AddModelError("", "Failed to create menu item.");
+                return View(item);
+            }
+            return RedirectToAction("MenuItems");
         }
 
         public async Task<IActionResult> UpdateMenuItem(int id)
