@@ -1,0 +1,49 @@
+﻿@model MenuItem
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="text-center">Skapa nytt bord</h2>
+                </div>
+                <div class="card-body">
+                    <form asp-action="CreateMenuItem" method="post">
+                        <div class="form-group mb-3">
+                            <label for="Name" class="form-label">Namn</label>
+                            <input asp-for="Name" class="form-control" id="Name" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="Description" class="form-label">Beskrivning</label>
+                            <input asp-for="Description" class="form-control" id="Description" />
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="Price" class="form-label">Pris</label>
+                            <input asp-for="Price" class="form-control" id="Price" />
+                            <span asp-validation-for="Price" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="TypeOf" class="form-label">Typ</label>
+                            <input asp-for="TypeOf" class="form-control" id="TypeOf" />
+                            <span asp-validation-for="TypeOf" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mb-3">
+                            <div class="form-check">
+                                <input asp-for="IsAvailable" class="form-check-input" type="checkbox" id="IsAvailable" />
+                                <label for="IsAvailable" class="form-check-label">Tillgänglig</label>
+                            </div>
+                            <span asp-validation-for="IsAvailable" class="text-danger"></span>
+                        </div>
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <button type="submit" class="btn btn-primary me-md-2">Skapa</button>
+                            <a href="javascript:history.back()" class="btn btn-secondary">Avbryt</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
