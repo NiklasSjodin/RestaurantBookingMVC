@@ -9,6 +9,7 @@
                 <th scope="col">Namn</th>
                 <th scope="col">Gäster</th>
                 <th scope="col">Bordsnummer</th>
+                <th scope="col">Tid</th>
                 <th scope="col">Åtgärder</th>
             </tr>
         </thead>
@@ -21,6 +22,7 @@
                     <td class="editable" data-field="FirstName">@reservation.FirstName</td>
                     <td class="editable" data-field="NumberOfGuests">@reservation.NumberOfGuests</td>
                     <td class="editable" data-field="TableNumber">@reservation.TableNumber</td>
+                    <td class="editable" data-field="Time">@reservation.Time</td>
                     <td>
                         <button class="btn btn-warning edit-btn">Ändra</button>
                         <form method="post" asp-action="DeleteReservation" style="display:inline;">
