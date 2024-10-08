@@ -1,10 +1,41 @@
-﻿@using RestaurantBookingMVC.Models.DTOs
-@model ReservationDTO
+﻿@model ReservationCreate
 
-<h2>Skapa en reservation</h2>
-
-<form asp-action="CreateReservation" method="post">  @* Vart all information ska skickas(vilken action som används) och vilken metod som används *@
-    <div class="form-group">
-        <label></label>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="text-center">Skapa nytt bord</h2>
+                </div>
+                <div class="card-body">
+                    <form asp-action="CreateReservation" method="post">
+                        <div class="form-group mb-3">
+                            <label for="TableID" class="form-label">Bordsnummer</label>
+                            <input asp-for="TableID" class="form-control" id="TableID" />
+                            <span asp-validation-for="TableID" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="CustomerID" class="form-label">Gäst Id</label>
+                            <input asp-for="CustomerID" class="form-control" id="CustomerID" />
+                            <span asp-validation-for="CustomerID" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="Time" class="form-label">Tid</label>
+                            <input asp-for="Time" class="form-control" id="Time" />
+                            <span asp-validation-for="Time" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="NumberOfGuests" class="form-label">Gäster</label>
+                            <input asp-for="NumberOfGuests" class="form-control" id="NumberOfGuests" />
+                            <span asp-validation-for="NumberOfGuests" class="text-danger"></span>
+                        </div>
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <button type="submit" class="btn btn-primary me-md-2">Skapa</button>
+                            <a href="javascript:history.back()" class="btn btn-secondary">Avbryt</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-</form>
+</div>
