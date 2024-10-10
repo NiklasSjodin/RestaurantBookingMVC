@@ -10,57 +10,85 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom shadow-sm mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand fs-3" asp-area="" asp-controller="Home" asp-action="Index" style="font-weight: bold">BG's</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+                <!-- Logo och Brand -->
+                <a class="navbar-brand fs-3" asp-area="" asp-controller="Home" asp-action="Index" style="font-weight: bold; color: #333;">
+                    BG's
+                </a>
+
+                <!-- Navbar toggler för mindre skärmar -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-center">
+
+                <!-- Navbar Links -->
+                <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item">
                             <a class="nav-link @(ViewContext.RouteData.Values["Controller"].ToString() == "Home" && ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active" : "")"
-                               asp-area="" asp-controller="Home" asp-action="Index">HEM</a>
+                               asp-area="" asp-controller="Home" asp-action="Index">
+                                HEM
+                            </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link @(ViewContext.RouteData.Values["Controller"].ToString() == "MenuItems" && ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active" : "")"
-                               asp-area="" asp-controller="MenuItems" asp-action="Index">MENY</a>
+                               asp-area="" asp-controller="MenuItems" asp-action="Index">
+                                MENY
+                            </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link @(ViewContext.RouteData.Values["Controller"].ToString() == "Bar" && ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active" : "")"
-                               asp-area="" asp-controller="Bar" asp-action="Index">BAREN</a>
+                               asp-area="" asp-controller="Bar" asp-action="Index">
+                                BAREN
+                            </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link @(ViewContext.RouteData.Values["Controller"].ToString() == "ChefsTable" && ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active" : "")"
-                               asp-area="" asp-controller="ChefsTable" asp-action="Index">CHEF'S TABLE</a>
+                               asp-area="" asp-controller="ChefsTable" asp-action="Index">
+                                CHEF'S TABLE
+                            </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link @(ViewContext.RouteData.Values["Controller"].ToString() == "GiftCard" && ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active" : "")"
-                               asp-area="" asp-controller="GiftCard" asp-action="Index">PRESENTKORT</a>
+                               asp-area="" asp-controller="GiftCard" asp-action="Index">
+                                PRESENTKORT
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link @(ViewContext.RouteData.Values["Controller"].ToString() == "Admin" && ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active" : "")"
-                               asp-area="" asp-controller="Admin" asp-action="Index">RESERVATIONER</a>
-                            <a class="nav-link @(ViewContext.RouteData.Values["Controller"].ToString() == "Admin" && ViewContext.RouteData.Values["Action"].ToString() == "MenuItems" ? "active" : "")"
-                               asp-area="" asp-controller="Admin" asp-action="MenuItems">MENY</a>
-                            <a class="nav-link @(ViewContext.RouteData.Values["Controller"].ToString() == "Admin" && ViewContext.RouteData.Values["Action"].ToString() == "Tables" ? "active" : "")"
-                               asp-area="" asp-controller="Admin" asp-action="Tables">BORD</a>
+                            <a class="nav-link" href="http://localhost:5173">BOKA BORD</a>
                         </li>
-                        <!----------------- Dropdown Meny för Contact och Policy ----------------->
+
+                        <!-- Admin-länkar -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                ADMIN
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="adminDropdown">
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Admin" asp-action="Index">RESERVATIONER</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Admin" asp-action="MenuItems">MENY</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Admin" asp-action="Tables">BORD</a></li>
+                            </ul>
+                        </li>
+
+                        <!-- Dropdown för Kontakt och Policy -->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle @(ViewContext.RouteData.Values["Controller"].ToString() == "Contacts" || ViewContext.RouteData.Values["Action"].ToString() == "Policy" ? "active" : "")"
-                               href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                MORE
+                               href="#" id="moreDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                MER
                             </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <ul class="dropdown-menu" aria-labelledby="moreDropdown">
                                 <li>
                                     <a class="dropdown-item @(ViewContext.RouteData.Values["Controller"].ToString() == "Contacts" ? "active" : "")"
-                                       asp-area="" asp-controller="Contacts" asp-action="Index">KONTAKT</a>
+                                       asp-area="" asp-controller="Contacts" asp-action="Index">
+                                        KONTAKT
+                                    </a>
                                 </li>
                                 <li>
                                     <a class="dropdown-item @(ViewContext.RouteData.Values["Action"].ToString() == "Policy" ? "active" : "")"
-                                       asp-area="" asp-controller="Home" asp-action="Policy">POLICY</a>
+                                       asp-area="" asp-controller="Home" asp-action="Policy">
+                                        POLICY
+                                    </a>
                                 </li>
                             </ul>
                         </li>
@@ -68,6 +96,7 @@
                 </div>
             </div>
         </nav>
+
 
 
     </header>
