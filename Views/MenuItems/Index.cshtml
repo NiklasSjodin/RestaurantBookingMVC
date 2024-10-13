@@ -1,7 +1,7 @@
 ﻿@model List<MenuItem>
 
 <!-- Hero image genom Bootstrap -->
-<div class="jumbotron jumbotron-fluid" style="background-image: url('/Images/daniel-l-K6Pz7chOo94-unsplash-_1_.webp'); background-size: cover; background-position: center; height: 400px; color: white;" alt="Wagyu steaks on the grill.">
+<div class="jumbotron jumbotron-fluid" style="background-image: url('/Images/daniel-l-K6Pz7chOo94-unsplash-_1_.webp'); background-size: cover; background-position: center; height: 400px; color: white;" role="img" aria-label="Wagyu steaks on the grill.">
 </div>
 
 <div class="container"> 
@@ -36,7 +36,7 @@
                     <div class="card-body">
                         <h5 class="card-title">@menuItem.Name</h5>
                         <p class="fw-light fst-italic">@menuItem.Description</p>
-                        <p class="card-text">Price: @menuItem.Price</p>
+                        <p class="card-text">Price: @menuItem.Price kr</p>
                     </div>
                 </div>
             </article>
