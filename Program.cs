@@ -1,3 +1,6 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
+using RestaurantBookingMVC.Handlers;
+
 namespace RestaurantBookingMVC
 {
     public class Program
@@ -6,15 +9,25 @@ namespace RestaurantBookingMVC
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
-            builder.Services.AddControllersWithViews();
-            builder.Services.AddHttpClient();
-            builder.Services.ConfigureApplicationCookie(options =>
+            builder.Services.AddSession(options =>
             {
-                options.Cookie.SecurePolicy = CookieSecurePolicy.Always; // Se till att cookies skickas över HTTPS
-                options.Cookie.SameSite = SameSiteMode.None; // Tillåt cookies att skickas över olika ursprung
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
             });
 
+            builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options =>
+                {
+                    options.LoginPath = "/Account/Login";
+                });
+
+            // Add services to the container.
+            builder.Services.AddControllersWithViews();
+            builder.Services.AddHttpClient("Api Client")
+                .AddHttpMessageHandler<JwtTokenHandler>();
+
+            builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            builder.Services.AddTransient<JwtTokenHandler>();
 
             var app = builder.Build();
 
@@ -30,7 +43,8 @@ namespace RestaurantBookingMVC
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllerRoute(
