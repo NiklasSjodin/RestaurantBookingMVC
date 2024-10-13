@@ -1,23 +1,28 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using RestaurantBookingMVC.Models;
 using RestaurantBookingMVC.Models.DTOs;
+using System.Net.Http.Headers;
 using System.Text;
 
 namespace RestaurantBookingMVC.Controllers
 {
+    [Authorize]
     public class AdminController : Controller
     {
         private readonly HttpClient _httpClient;
+        private readonly IHttpClientFactory _httpClientFactory;
         private string baseUri = "https://localhost:7037/"; // Vår bas url från vårt api
-        public AdminController(HttpClient client)
+        public AdminController(HttpClient client, IHttpClientFactory httpClientFactory)
         {
-            _httpClient = client;
+            _httpClient = httpClientFactory.CreateClient("Api Client");
         }
         // Reservations
         public async Task<IActionResult> Index() // Hämtar alla reservationer
         {
             ViewData["Title"] = "Admin | BG's"; // Sätter titeln i fliken
+
             var response = await _httpClient.GetAsync($"{baseUri}api/Reservations"); // Hämtar vår data från vårt API
             var json = await response.Content.ReadAsStringAsync(); // Omvandlar datan till json sträng
             var reservationsList = JsonConvert.DeserializeObject<List<ReservationDTO>>(json); // Omvandlar strängen till en list av menu item
@@ -180,6 +185,8 @@ namespace RestaurantBookingMVC.Controllers
         public async Task<IActionResult> Tables()
         {
             ViewData["Title"] = "Admin | BG's";
+            var token = HttpContext.Request.Cookies["jwtToken"];
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             var response = await _httpClient.GetAsync($"{baseUri}api/Tables");
             var json = await response.Content.ReadAsStringAsync();
             var tablesList = JsonConvert.DeserializeObject<List<Table>>(json);
