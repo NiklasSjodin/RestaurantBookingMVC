@@ -15,6 +15,9 @@
         </thead>
         <tbody>
             <a asp-controller="Admin" asp-action="CreateReservation" class="btn btn-outline-dark fw-semibold">Skapa Reservation</a> @* Vilken controller som ska användas och i vilken action *@
+            <form asp-controller="Account" asp-action="Logout" method="post">
+                <button type="submit" class="btn btn-outline-danger">Logga Ut</button>
+            </form>
             @foreach (var reservation in Model)
             {
                 <tr data-id="@reservation.ReservationId">
