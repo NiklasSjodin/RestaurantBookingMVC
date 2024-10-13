@@ -13,6 +13,9 @@
         </thead>
         <tbody>
             <a asp-controller="Admin" asp-action="CreateTable" class="btn btn-outline-dark fw-semibold">Skapa Bord</a> @* Vilken controller som ska användas och i vilken action *@
+            <form asp-controller="Account" asp-action="Logout" method="post">
+                <button type="submit" class="btn btn-outline-danger">Logga Ut</button>
+            </form>
             @foreach (var table in Model)
             {
                 <tr>
